@@ -24,9 +24,5 @@
   "bugs": {
     "url": "https://github.com/Jam3/google-maps-image-api-url/issues"
   },
-  "homepage": "https://github.com/Jam3/google-maps-image-api-url",
-  "dependencies": {
-    "merge": "^1.2.0"
-  },
-  "devDependencies": {}
+  "homepage": "https://github.com/Jam3/google-maps-image-api-url"
 }
