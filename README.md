@@ -1,94 +1,79 @@
-<a name="module_google-maps-image-api"></a>
-#google-maps-image-api
-<a name="module_google-maps-image-api..BASE_URL"></a>
-##google-maps-image-api~BASE_URL
-Allows you to easily get Google Maps Image API urls.
+# google-maps-image-api
 
-Google Maps Image API allows you to get static images of a 2d map or streetview.
+**Allows you to easily get Google Maps Image API urls.**
 
-This module will return a string which is a url you can load an image from.
+Google Maps Image API allows you to get static images of a 2d map or streetview. This module will return the url of such an image. The options correlate to those in the API.
 
-Options passed in correlate to properties you can pass to Google Maps Image API.
+## usage
 
-Here are parameter's you can pass through opts to get a url:
+```js
+const image = require('google-maps-image-api')
+image(opts) // -> url
+```
+
+## static maps
+
+### required parameters
 
 ```javascript
 {
-	//// REQUIRED ////
-	type: 'staticmap', // This value is required if you want to render a static map
-	
-	center: '40.714728,-73.998672', // This will be the center of your image. 
-									// It can also be a street address
- 
+	type: 'staticmap',
+	center: '40.714728,-73.998672' // can also be a street address
+}
+```
 
-	
-	//// OPTIONAL ////
-	key: 'your api key', // Your Google API Key
+### optional parameters
 
-	zoom: 14, // This will be how zoomed in the map will be. 0 is where you 
- 		  // can see the entire world, 21 is where you see streets. 14 is default
- 		  
-	size: '320x240', // This is the pixel size of your map. Default 320x240
-	
-	scale: 1, // This property is meant for rendering maps with high pixel 
-			  // resolutions eg. iphone 4+ is retina this value should be set to 2
+```javascript
+{
+	key: '<your api key>', // your Google API Key
+	zoom: 14, // 0 = entire world, 21 = streets
+	size: '320x240', // size of the image
+	scale: 1, // for retina screens this should be 2
+	format: 'JPEG', // or 'PNG' or 'GIF'
+	maptype: 'roadmap', // or 'satellite' or 'hybrid' or 'terrain'
+	language: 'en', // language of the map
 
-	format: 'JPEG', // Possible valuse 'PNG', 'GIF', 'JPEG',
+ 	region: 'us', // country code in ccTLD
+ 	// defines the appropriate borders to display, based on geo-political sensitivities
 
-	maptype: 'roadmap', // What type of map you want to render 
-						// 'roadmap', 'satellite', 'hybrid', and 'terrain'
-
-	language: 'en', // Language in which you want the map to be rendered
-
- region: 'us', // Country code in: ccTLD. defines the appropriate borders to display, 
- 			  // based on geo-political sensitivities
-
-	markers: 'color:blue|label:S|11211|11206|11222',
-	// Add markers to the map. For docs:
-	// https://developers.google.com/maps/documentation/staticmaps/index#Markers
+	markers: 'color:blue|label:S|11211|11206|11222', // add markers to the map
+	// see https://developers.google.com/maps/documentation/staticmaps/index#Markers
 
 	path: 'color:0x0000ff|weight:5|40.737102,-73.990318|40.749825,-73.987963',
-	// Add a path to the map. A path can be filled or just a line. For docs:
-	// https://developers.google.com/maps/documentation/staticmaps/index#Paths
+	// Add a path to the map. A path can be filled or just a line.
+	// see https://developers.google.com/maps/documentation/staticmaps/index#Paths
 
-	visible: 'Toronto', // you can specify locations that should be visible on the 
-				 		// rendered map. This can be either long,lat or a location name
+	visible: 'Toronto', // a location that should be visible
+	// This can be either long,lat or a location name.
 
-	style: 'feature:administrative|element:labels|weight:3.9|visibility:on|inverse_lightness:true', 
-	// this property will change how features are rendered eg. roads, parks, etc.
-	// For docs:
-	// https://developers.google.com/maps/documentation/staticmaps/index#StyledMaps
+	style: 'feature:administrative|element:labels|weight:3.9|visibility:on|inverse_lightness:true',
+	// how features are rendered eg. roads, parks, etc.
+	// see https://developers.google.com/maps/documentation/staticmaps/index#StyledMaps
 }
 ```
 
-Here are the parameters you'd pass in to render a streetview:
+## streetview pictures
+
+### required parameters
+
 ```javascript
 {
-	//// REQUIRED ////
 	type: 'streetview',
-	location: 'Toronto', // Location name or long,lat. 
-						 // if you ommit location you must define pano
-	pano: 'pano id', // An id for a specific panorama. If you omit 
-					 // you must define a location
-
-	//// OPTIONAL ////
-	key: 'your api key', // Your Google API Key
-	
-	size: '320x240', // The size of your render in pixels
-
-	heading: 45, // This is the compass heading which the camera is pointing at
-				 // between 0 and 360. 0 == North
-
-	fov: 90, // field of view expressed in degrees. (angle which determines how much you see)
-			 // default is 90
-
-	pitch: 0, // up down angle the camera is pointing at. 90 is straight up and -90 is straight down
+	// You must define either location or pano.
+	location: 'Toronto', // location name or long,lat
+	pano: '<pano id>', // id of a specific panorama
 }
 ```
 
-**Params**
+### optional parameters
 
-- opts `Object` - These are options that will be used to render streetview and map images  
-
-**Scope**: inner member of [google-maps-image-api](#module_google-maps-image-api)  
-**Returns**: `String` - A url which can be used to load an image  
+```javascript
+{
+	key: '<your api key>', // your Google API key
+	size: '320x240', // size of the image
+	heading: 45, // bearing (direction) of the camera. 0 - 360. 0 == North
+	fov: 90, // field of view in degrees.
+	pitch: 0, // up/down angle of the camera. 90 = straight up. -90 = straight down
+}
+```
