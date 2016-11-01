@@ -8,7 +8,10 @@ Google Maps Image API allows you to get static images of a 2d map or streetview.
 
 ```js
 const image = require('google-maps-image-api')
-image(opts) // -> url
+image({
+	type: 'staticmap',
+	center: '40.714728,-73.998672'
+}) // -> url
 ```
 
 ## static maps
