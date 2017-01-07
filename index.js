@@ -7,7 +7,7 @@ var BASE_URL = 'https://maps.googleapis.com/maps/api/';
 
 module.exports = function( opts ) {
 
-	var zoom = typeof opts.zoom === 'number' ? opt.zoom : 14;
+	var zoom = typeof opts.zoom === 'number' ? opts.zoom : 14;
 	var size = opts.size || '320x240';
 
 	if( opts.type == 'staticmap' ) {
